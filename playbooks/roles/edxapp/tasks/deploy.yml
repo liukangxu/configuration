@@ -424,9 +424,9 @@
   when: CREATE_SERVICE_WORKER_USERS
 
 - name: create service worker users
-  shell: "{{ demo_edxapp_venv_bin }}/python ./manage.py lms --settings={{ demo_edxapp_settings }} --service-variant lms manage_user {{ item.username}} {{ item.email }} --unusable-password {% if item.is_staff %} --staff{% endif %}"
+  shell: "{{ edxapp_venv_bin }}/python ./manage.py lms --settings={{ edxapp_settings }} --service-variant lms manage_user {{ item.username}} {{ item.email }} --unusable-password {% if item.is_staff %} --staff{% endif %}"
   args:
-    chdir: "{{ demo_edxapp_code_dir }}"
+    chdir: "{{ edxapp_code_dir }}"
   become_user: "{{ common_web_user }}"
   with_items: "{{ service_worker_users }}"
   when: CREATE_SERVICE_WORKER_USERS
